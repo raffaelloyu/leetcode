@@ -2,9 +2,7 @@ import solution
 import numpy as np
 def main():
     s = solution.Solution()
-    s.canJump([3,0,8,2,0,0,1])
-
-    #s.maxProfit(a)
+    s.jump([2, 3, 1, 1, 4, 6])
     pass
     
 

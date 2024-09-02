@@ -120,3 +120,20 @@ class Solution:
             if maxStep + cur >= length - 1:
                 success = False
         return not success
+    
+    def jump(self, nums: list[int]) -> int:
+        curposition = 0
+        nextposition = 0
+        jumptime = 0
+        
+        for i in range(len(nums) - 1):
+            nextposition = max(nextposition, i + nums[i])
+            if nextposition >= len(nums) - 1:
+                jumptime += 1
+                break
+            if i == curposition:
+                jumptime += 1
+                curposition = nextposition
+
+        return jumptime
+                
