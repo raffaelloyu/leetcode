@@ -136,4 +136,16 @@ class Solution:
                 curposition = nextposition
 
         return jumptime
-                
+
+    def hIndex(self, citations: list[int]) -> int:
+        h = len(citations)
+        citations.sort()
+        for c in citations:
+            if c >= h:
+                return h
+            else:
+                h -= 1
+        return h 
+    
+    
+
