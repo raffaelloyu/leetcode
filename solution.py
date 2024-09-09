@@ -147,5 +147,67 @@ class Solution:
                 h -= 1
         return h 
     
+    def productExceptSelf(self, nums: list[int]) -> list[int]:
+        n = len(nums)
+        
+        prev = [1] * n
+        next = [1] * n
+        
+        for i in range(1, n):
+            prev[i] = prev[i - 1] * nums[i - 1]
+        
+        for i in range(n - 2, -1, -1):
+            next[i] = next[i + 1] * nums[i + 1]
+        
+        answer = [prev[i] * next[i] for i in range(n)]
+        
+        return answer
+
+    def canCompleteCircuit(self, gas: list[int], cost: list[int]) -> int:
+        if sum(cost) > sum(gas):
+            return -1 
+        curGas = 0
+        start = 0
+        for i in range(len(gas)):
+            curGas = curGas + gas[i] - cost[i]
+            if curGas < 0:
+                curGas = 0
+                start = i + 1
+        return start
+    
+    def candy(self, ratings: list[int]) -> int:
+        length = len(ratings)
+        candies = [1] * length
+        for i in range(1, length):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
+            elif ratings[i] == ratings[i - 1]:
+                candies[i] = candies[i - 1]
+            else:
+                candies[i] = 1
+
+        for i in range(length, 0):
+            if ratings[i - 1] > ratings[i]:
+                candies[i - 1] = max(candies[i - 1], candies[i] + 1)
+            elif ratings[i - 1] == ratings[i]:
+                candies[i - 1] = max(candies[i - 1], candies[i])
+            else:
+                candies[i] = max(1, candies[i])
+
+        return sum(candies) 
+
+    def romanToInt(self, s: str) -> int:
+        table = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+        ans = 0
+        length = len(s)
+        #i = 0
+        for i in range(0, length):
+            if i < length - 1 and table[s[i]] < table[s[i + 1]]:
+                ans -= table[s[i]]
+            else:
+                ans += table[s[i]]
+        return ans
+    
+
     
 
