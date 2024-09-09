@@ -147,5 +147,17 @@ class Solution:
                 h -= 1
         return h 
     
-    
+    def intToRoman(self, num: int) -> str:
+        digits =[(1000, "M"),
+        (900,"CM"),(500,"D"),(400,"CD"), (100, "C"),  
+        (90, "XC"),(50, "L"),(40, "XL"),(10, "X"),
+        (9, "IX"),(5, "V"),(4, "IV"),(1, "I")]
+
+        roman_digits = []
+        for value, symbol in digits:
+            if num == 0:
+                break
+            count, num = divmod(num, value) #divmod 函数会返回 num 除以 value 的商和余数，count 是商，num 是余数。count 表示当前数字可以由几个 value 组成
+            roman_digits.append(symbol*count)
+        return "".join(roman_digits)
 
