@@ -2,7 +2,9 @@ import solution
 import numpy as np
 def main():
     s = solution.Solution()
-    s.convert("AB", 1)
+    s.fullJustify(
+        ["What","must","be","acknowledgment","shall","be"],
+        16)
     pass
     
 

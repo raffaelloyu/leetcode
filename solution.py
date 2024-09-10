@@ -283,3 +283,49 @@ class Solution:
                     return i
         return ans
 
+    def fullJustify(self, words: list[str], maxWidth: int) -> list[str]:
+        ans = [[]]
+        res = []
+        i = 0
+        line = 0
+        length = 0
+        count = len(words)
+        while i < count:
+            while length + len(words[i]) <= maxWidth:
+                length = length + len(words[i]) + 1
+                ans[line].append(words[i])
+                i += 1
+                if i == count:
+                    break
+            ans.append([])
+            line += 1
+            length = 0
+        ans.pop(-1)
+
+        for lst in ans:
+            lstLen = sum(map(len, lst))
+            lstCount = len(lst)
+            spaceCount = maxWidth - lstLen
+            indx = 0
+            if lstCount == 1:
+                lst[0] += ' ' * spaceCount
+                spaceCount = 0
+            if ans.index(lst) == len(ans) - 1:
+                while spaceCount > 0:
+                    if indx == lstCount - 1:
+                        lst[indx] += ' ' * spaceCount
+                        spaceCount = 0
+                    else:
+                        lst[indx] += ' '
+                        indx += 1
+                        spaceCount -= 1
+            else:
+                while spaceCount > 0:
+                    lst[indx] += ' '
+                    indx = 0 if indx + 1 == lstCount - 1 else indx + 1
+                    spaceCount -= 1
+            s = ''.join(lst)
+            print(s)
+            res.append(s)
+
+        return res
