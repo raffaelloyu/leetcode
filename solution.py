@@ -208,7 +208,6 @@ class Solution:
                 ans += table[s[i]]
         return ans
     
-
     def intToRoman(self, num: int) -> str:
         digits =[(1000, "M"),
         (900,"CM"),(500,"D"),(400,"CD"), (100, "C"),  
@@ -222,4 +221,65 @@ class Solution:
             count, num = divmod(num, value) #divmod 函数会返回 num 除以 value 的商和余数，count 是商，num 是余数。count 表示当前数字可以由几个 value 组成
             roman_digits.append(symbol*count)
         return "".join(roman_digits)
+    
+    def lengthOfLastWord(self, s: str) -> int:
+        s = s.strip()
+        s = s.split(' ')
+        return len(s[- 1])
+    
+    def longestCommonPrefix(self, strs: list[str]) -> str:
+        ans = ''
+        strs = sorted(strs)
+        first = strs[0]
+        last = strs[-1]
+        minLen = len(min(strs, key=len))
+        for i in range(minLen):
+            if first[i] != last[i]:
+                return ans
+            ans += first[i]
+        return ans
+    
+    def reverseWords(self, s: str) -> str:
+        s = s.split(' ')
+        s = [c for c in s if c != '']
+        ans = []
+        for i in range(len(s) - 1, -1, -1):
+            ans.append(s[i])
+        return ' '.join(ans)
+
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+        ans = [[] for _ in range(numRows)]
+        res = []
+        indx = 0
+        step = 1
+        for i in s:
+            ans[indx].append(i)
+            
+            indx += step
+            if indx == numRows - 1 or indx == 0:
+                step = -step
+        for a in ans:
+            res.append(a)
+        res = [j for i in ans for j in i]
+        return ''.join(res)
+    
+    def strStr(self, haystack: str, needle: str) -> int:
+        nlen = len(needle)
+        hlen = len(haystack)
+        ans = -1
+        if nlen > hlen:
+            return ans
+        for i in range(hlen):
+            if haystack[i] == needle[0]:
+                j = 0
+                while j < nlen and i + j < hlen:
+                    if haystack[i + j] == needle[j]:
+                        j += 1
+                    else:
+                        break
+                if j == nlen:
+                    return i
+        return ans
 

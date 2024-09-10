@@ -2,7 +2,7 @@ import solution
 import numpy as np
 def main():
     s = solution.Solution()
-    s.romanToInt("III")
+    s.convert("AB", 1)
     pass
     
 
